@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script>
         function submitForm() {
+            window.localStorage.setItem(document.getElementById('username').value, crypto.randomUUID())
         }
     </script>
     <style>
@@ -47,6 +48,7 @@
             <label for="password" class="form-label">Password</label>
             <input type="password" class="form-control" name="password" id="password">
         </div>
+        <button type="submit" onclick="submitForm()" id="btn" class="btn btn-primary">Submit</button>
     </form>
 </div>
 </body>
