@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.6/purify.min.js"></script>
+    <title>Login</title>
+    <!-- the form awesome library is used to add icons to our form -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    <!-- include the stylesheet file -->
+    <link href="/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<input type="hidden" name="csrf_token" value="<%=csrfToken%>">
+<div class="account">
+    <h1>Account</h1>
+        <div class="balance"> Balance = 50$ </div>
+        <a href="/logout"> logout</a>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
