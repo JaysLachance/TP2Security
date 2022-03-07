@@ -40,7 +40,7 @@ const pool = mysql.createPool({
     user            : 'root',
     password        : '',
     database        : 'db_users',
-    port: 3306,
+    port: process.env.PORT || 3306,
 })
 
 //options pour prévenir certains attaques
