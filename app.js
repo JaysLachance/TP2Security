@@ -36,12 +36,13 @@ app.set('view engine', 'ejs')
 //mysql
 const pool = mysql.createPool({
     connectionLimit : 10,
-    host            : 'localhost',
-    user            : 'root',
-    password        : '',
-    database        : 'db_users',
+    host            : 'us-cdbr-east-05.cleardb.net',
+    user            : 'be15cc1e26474b',
+    password        : '5676dc60',
+    database        : 'heroku_221a1e58d37b7fd',
     port: process.env.PORT || 3306,
 })
+
 
 //options pour prévenir certains attaques
 let options = {
@@ -77,7 +78,6 @@ app.post('/register', urlEncodedParser,
      const errors = validationResult(req)
         if (!errors.isEmpty()) {
             const alert = errors.array()
-            //res.locals.csrftoken = req.csrfToken()
             res.render('register', {
                 alert
             }, )
@@ -85,13 +85,12 @@ app.post('/register', urlEncodedParser,
         else {
             pool.getConnection(async (err, connection) => {
                 if (err) throw err
-                console.log(`Connected as id ${connection.threadId}`);
 
                 let params = req.body;
                 const salt = await bcrypt.genSalt();
                 params.password = await bcrypt.hash(params.password, salt);
-                console.log(params.password)
-                connection.query('INSERT INTO users SET ?', params, (err, rows) => {
+
+                connection.query('INSERT INTO db_users SET ?', params, (err, rows) => {
                     connection.release();
 
                     if (!err) {
@@ -114,11 +113,10 @@ app.post('/login', urlEncodedParser,     [
 ],async (req, res) => {
 
     const username = req.body.username
-    const query=("SELECT password FROM users WHERE username = ?");
+    const query=("SELECT password FROM db_users WHERE username = ?");
 
     pool.getConnection( async (err, connection) => {
         if (err) throw err
-        console.log(`Connected as id ${connection.threadId}`);
 
         connection.query(query, username, async (err, rows) => {
 
